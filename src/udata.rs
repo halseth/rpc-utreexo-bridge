@@ -270,7 +270,7 @@ pub mod bitcoin_leaf_data {
     use serde::Deserialize;
     use serde::Serialize;
     use sha2::Digest;
-    use sha2::Sha512_256;
+    use sha2::Sha256;
 
     use super::LeafContext;
 
@@ -317,7 +317,7 @@ pub mod bitcoin_leaf_data {
         fn compute_hash(&self) -> BitcoinNodeHash {
             let mut ser_utxo = vec![];
             let _ = self.utxo.consensus_encode(&mut ser_utxo);
-            let leaf_hash = Sha512_256::new()
+            let leaf_hash = Sha256::new()
                 .chain_update(UTREEXO_TAG_V1)
                 .chain_update(UTREEXO_TAG_V1)
                 .chain_update(self.block_hash)
